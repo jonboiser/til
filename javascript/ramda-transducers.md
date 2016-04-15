@@ -23,15 +23,12 @@ numbers
 
 So, we start with an array, filter it to another array, map it to another array, then reduce that array down to a number. This computation creates two intermediate arrays. For a small problem like this, it's okay, but could really bog down a problem that needs to process millions of numbers.
 
-We can avoid having to create these intermediate arrays by considering that we can reimplement this solution as follows:
+We can use transducers to avoid creating these intermediate arrays. First we define a function that can take elements of `numbers` and do the following:
+
+1. If it is a multiple of 3 or 5, ignore it. Else, move it forward.
+2. Add 1 to that number.
+3. Add the result to the running total.
 
 ```javascript
-const multOrZero = (x) => isMult(x) ? x : 0
-const addOne = (x) => x === 0 ? x : x + 1
-const transform = R.compose(addOne, multOrZero)
-numbers.map(transform).reduce(R.add, 0)
+
 ```
-
-What I did was define functions that sort of did what the map and filter were doing, but were compatible in a way that they could be composed. By doing things this way, we bring things down to one intermediate array.
-
-But really, we don't need any arrays at all.
