@@ -41,7 +41,8 @@ import 'sinon-as-promised'
 Here's how I would write a spec to check that my component updates with the data sent through the Promise.
 
 ```javascript
-import { mount } from enzyme
+import React from 'react'
+import { mount } from 'enzyme'
 
 describe('Delayed', () => {
   it('updates after the promise resolves' () => {
